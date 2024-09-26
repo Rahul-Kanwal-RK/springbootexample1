@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout source
         uses: action/checkout@v4
-      - name: Setup java
+      - name: Setup Java
         uses: action/setup-java@v4
         with:
           distribution: 'temurin'

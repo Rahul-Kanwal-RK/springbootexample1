@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
       - name: Build project
         run: mvn clean install -DskipTests
-      - name: Deploy to elastic beanstalk
+      - name: Deploy to elastic beanstalk please
         uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}

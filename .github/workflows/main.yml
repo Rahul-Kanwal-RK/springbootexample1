@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Build project
-        run: maven clean install -DskipTests
+        run: mvn clean install -DskipTests
       - name: Deploy to elastic beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
         with:

@@ -1,0 +1,29 @@
+name: Deploy to Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: action/checkout@v4
+      - name: Setup Java
+        uses: action/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build project
+        run: maven clean install -DskipTests
+      - name: Deploy to elastic beanstalk
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: 'springbootapp1'
+          environment_name: 'Springbootapp1-env'
+          version_label: ${{ github.sha }}
+          region: us-east-1
+          deployment_package: firstAPI/target/firstAPI-0.0.1-SNAPSHOT.jar

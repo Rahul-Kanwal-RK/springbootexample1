@@ -26,4 +26,4 @@ jobs:
           environment_name: 'Springbootapp1-env'
           version_label: ${{ github.sha }}
           region: us-east-1
-          deployment_package: firstAPI/target/firstAPI-0.0.1-SNAPSHOT.jar
+          deployment_package: target/firstAPI-0.0.1-SNAPSHOT.jar

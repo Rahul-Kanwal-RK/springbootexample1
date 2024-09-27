@@ -16,7 +16,7 @@ public class UserService {
         UserList = new ArrayList<User>();
         User user1 = new User(1, "Rahul Kanwal", 25);
         User user2 = new User(2, "Kartik Chindarkar", 27);
-        User user3 = new User(3, "Karthik Reddy", 27);
+        User user3 = new User(3, "Manu Jain", 27);
         User user4 = new User(4, "John Doe", 24);
         User user5 = new User(5, "Gon Freecss", 12);
         UserList.addAll(Arrays.asList(user1, user2, user3, user4, user5));

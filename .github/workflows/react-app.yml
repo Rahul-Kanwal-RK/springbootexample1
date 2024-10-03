@@ -69,7 +69,7 @@ jobs:
           environment_name: Example-react-app-env
           version_label: ${{ github.sha }}
           region: us-east-1
-          deployment_package: deploy.zip
+          deployment_package: frontend-app/deploy.zip
 
       - name: Deployed!
         run: echo App deployed to ELB

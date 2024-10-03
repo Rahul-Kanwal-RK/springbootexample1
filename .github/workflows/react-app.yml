@@ -20,6 +20,9 @@ jobs:
       - name: List files for debugging
         run: ls -la
       
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
       - name: Deploy to Elastic Beanstalk please
         uses: einaregilsson/beanstalk-deploy@v21
         with:

@@ -32,7 +32,7 @@ jobs:
       - name: Create ZIP Archive
         run: |
           cd frontend-app
-          zip -r ../frontend_app_deployment.zip build Dockerfile
+          zip -r ../frontend_app_deployment.zip
       
       - name: Deploy to Elastic Beanstalk please
         uses: einaregilsson/beanstalk-deploy@v21

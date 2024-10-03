@@ -59,7 +59,7 @@ jobs:
         # zip all files except .git
         run: zip -r deploy.zip * -x "**.git**"
 
-      - name: Deploy to EB
+      - name: Deploy to Elastic Beanstalk please
         uses: einaregilsson/beanstalk-deploy@v21
         with:
          #  input the credentials you used to setup AWS CLI and credentials for the application environment
@@ -72,4 +72,4 @@ jobs:
           deployment_package: frontend-app/deploy.zip
 
       - name: Deployed!
-        run: echo App deployed to ELB
+        run: echo App deployed to Elastic Beanstalk

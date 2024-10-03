@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://springbootapp1.us-east-1.elasticbeanstalk.com/user?id=2');
+        const response = await fetch('http://springbootapp1.us-east-1.elasticbeanstalk.com/user?id=1');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

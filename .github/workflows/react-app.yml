@@ -7,15 +7,32 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend-app
+    # defaults:
+      # run:
+      #   working-directory: ./frontend-app
     steps:
-      - name: Checkout source code
+      - name: Checkout Repository
         uses: actions/checkout@v2
-      
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: |
+          cd frontend-app
+          npm install
+
+      - name: Build Project
+        run: |
+          cd frontend-app
+          npm run build
+
+      - name: Create ZIP Archive
+        run: |
+          cd frontend-app
+          zip -r ../frontend_app_deployment.zip build Dockerfile
       
       - name: Deploy to Elastic Beanstalk please
         uses: einaregilsson/beanstalk-deploy@v21
@@ -27,5 +44,5 @@ jobs:
           version_label: ${{ github.sha }}
           existing_bucket_name: elasticbeanstalk-us-east-1-116981765536
           region: us-east-1
-          deployment_package: deploy.zip
+          deployment_package: frontend_app_deployment.zip
         

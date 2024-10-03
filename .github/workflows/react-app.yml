@@ -33,5 +33,5 @@ jobs:
           version_label: ${{ github.sha }}
           existing_bucket_name: elasticbeanstalk-us-east-1-116981765536
           region: us-east-1
-          deployment_package: deploy.zip
+          deployment_package: frontend-app/deploy.zip
         

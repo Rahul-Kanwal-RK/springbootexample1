@@ -1,30 +1,47 @@
-name: Deploy React to AWS
+# name: Deploy React to AWS Elastic Beanstalk
+# on:
+#   push:
+#     branches:
+#       - "main"
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: ./frontend-app
+#     steps:
+#       - name: Checkout source code
+#         uses: actions/checkout@v2
+
+#       - name: Deploy to Elastic Beanstalk please
+#         uses: einaregilsson/beanstalk-deploy@v21
+#         with:
+#           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+#           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           application_name: example-react-app
+#           environment_name: Example-react-app-env
+#           version_label: ${{ github.sha }}
+#           existing_bucket_name: elasticbeanstalk-us-east-1-116981765536
+#           region: us-east-1
+#           deployment_package: deploy.zip
+
+name: Deploy React app to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - "main"
-
+      - main
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend-app
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
-
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v21
+      - name: Checkout Repository
+        uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: example-react-app
-          environment_name: Example-react-app-env
-          version_label: ${{ github.sha }}
-          existing_bucket_name: elasticbeanstalk-us-east-1-116981765536
-          region: us-east-1
-          deployment_package: deploy.zip
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Deploy Static Site to S3 Bucket Please
+        run: aws s3 sync . s3://elasticbeanstalk-us-east-1-116981765536 --delete          

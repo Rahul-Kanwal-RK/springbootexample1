@@ -9,13 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend-app/
+        working-directory: ./frontend-app
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
       
       - name: Generate deployment package
         run: zip -r deploy.zip .
+
+      - name: List files for debugging
+        run: ls -la
       
       - name: Deploy to Elastic Beanstalk please
         uses: einaregilsson/beanstalk-deploy@v21
@@ -27,5 +30,5 @@ jobs:
           version_label: ${{ github.sha }}
           existing_bucket_name: elasticbeanstalk-us-east-1-116981765536
           region: us-east-1
-          deployment_package: /deploy.zip
+          deployment_package: deploy.zip
         
